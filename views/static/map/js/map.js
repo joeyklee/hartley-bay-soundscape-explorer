@@ -43,7 +43,7 @@ $(document).ready(function() {
     var geojson = [{
         "geometry": {
             "type": "Point",
-            "coordinates": [-0.12960000, 51.50110000]
+            "coordinates": [53.420121, -129.252830]
         },
         "properties": {
             "id": "cover",
@@ -52,66 +52,66 @@ $(document).ready(function() {
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [-0.15591514, 51.51830379]
+            "coordinates": [53.389010, -129.162193]
         },
         "properties": {
-            "id": "baker"
+            "id": "location1"
         }
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [-0.07571203, 51.51424049]
+            "coordinates": [53.559837, -128.905388]
         },
         "properties": {
-            "id": "aldgate"
+            "id": "location2"
         }
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [-0.08533793, 51.50438536]
+            "coordinates": [53.773014, -128.877922]
         },
         "properties": {
-            "id": "london-bridge"
+            "id": "location3"
         }
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [0.05991101, 51.48752939]
+            "coordinates": [53.302872, -129.051457]
         },
         "properties": {
-            "id": "woolwich"
+            "id": "location4"
         }
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [-0.18335806, 51.49439521]
+            "coordinates": [53.189280, -129.497771]
         },
         "properties": {
-            "id": "gloucester"
+            "id": "location5"
         }
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [-0.19684993, 51.5033856]
+            "coordinates": [53.134132, -129.731425]
         },
         "properties": {
-            "id": "caulfield-gardens"
+            "id": "location6"
         }
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [-0.10669358, 51.51433123]
+            "coordinates": [53.044382, -129.178564]
         },
         "properties": {
-            "id": "telegraph"
+            "id": "location7"
         }
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [-0.12416858, 51.50779757]
+            "coordinates": [53.605014, -129.248651]
         },
         "properties": {
-            "id": "charing-cross"
+            "id": "location8"
         }
     }];
 
@@ -158,12 +158,14 @@ $(document).ready(function() {
         // Set a body class for the active section.
         document.body.className = 'section-' + index;
 
+        console.log(geojson[index]);
+
         // Ease map to active marker.
-        // if (!ease) {
-        //     map.centerzoom(markers[index].location, markers[index].data.properties.zoom || 14);
-        // } else {
-        //     map.ease.location(markers[index].location).zoom(markers[index].data.properties.zoom || 14).optimal(0.5, 1.00);
-        // }
+        if (!ease) {
+            map.setView([geojson[index].geometry.coordinates[0], geojson[index].geometry.coordinates[1]], geojson[index].properties.zoom || 13);
+        } else {
+            map.setView([geojson[index].geometry.coordinates[0], geojson[index].geometry.coordinates[1]], geojson[index].properties.zoom || 12);
+        }
 
         return true;
     };

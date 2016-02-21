@@ -56,7 +56,7 @@ p { margin:0px; }
   width:120px; height:120px;
   margin:0px auto 20px;
   }
-.cover.active:before { background:url(sprite.png) 0px -120px no-repeat; }
+/*.cover.active:before { background:url(sprite.png) 0px -120px no-repeat; }*/
 
 #pane {
   position:fixed;
@@ -80,7 +80,7 @@ p { margin:0px; }
   width:120px;
   height:120px;
   margin:-60px 0px 0px -60px;
-  background:url(sprite.png) 120px 120px no-repeat;
+  /*background:url(sprite.png) 120px 120px no-repeat;*/
   position:absolute;
   }
 .spot-cover { display:none; }
