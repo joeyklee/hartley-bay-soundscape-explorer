@@ -52,9 +52,9 @@ app.get('/', function (req, res) {
   res.render('static/index');
 });
 
-app.get('/page1', function (req, res) {
+app.get('/map', function (req, res) {
   // res.send('Hello World!');
-  res.render('static/page1');
+  res.render('static/map');
 });
 
 // app.get('/static/page1', function (req, res) {
