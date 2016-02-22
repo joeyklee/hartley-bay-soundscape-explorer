@@ -169,14 +169,15 @@ function setup(){
             memo += el.offsetHeight;
 
             	// if switched to a section check if active and play sound. 
-            	if(sections[index].className == " active" && geojson[index].properties.sound){
-            		if(soundList[index].isPlaying()){
+            	// if it is a short soundbit it will play over and over on window scroll just fyi
+            	if(sections[index].className == " active" && geojson[index].properties.sound && soundList[index] !== undefined){
+            		if(soundList[index].isPlaying() && soundList[index] !== undefined){
             			console.log("yes");
             		}else{
             			soundList[index].play();
             		}
 		             
-	             } else{
+	             } else if (soundList[index] !== undefined){
 	             	soundList[index].stop();
 	             	console.log("no");
 	             }
