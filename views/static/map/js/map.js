@@ -177,6 +177,9 @@ function setup(){
             		if(soundList[index].isPlaying() && soundList[index] !== undefined){
             			console.log("yes");
             		}else{
+            			soundList.forEach(function(obj){
+            				obj.stop();
+            			})
             			soundList[index].play();
             		}
 		             
