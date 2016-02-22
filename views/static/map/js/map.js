@@ -1,45 +1,14 @@
-$(document).ready(function() {
-    // var places = {
-    //     type: 'FeatureCollection',
-    //     features: [{
-    //         geometry: { type: "Point", coordinates: [-0.12960000, 51.50110000] },
-    //         properties: { id: "cover", zoom: 9 },
-    //         type: 'Feature'
-    //     }, {
-    //         geometry: { type: "Point", coordinates: [-0.15591514, 51.51830379] },
-    //         properties: { id: "baker" },
-    //         type: 'Feature'
-    //     }, {
-    //         geometry: { type: "Point", coordinates: [-0.07571203, 51.51424049] },
-    //         properties: { id: "aldgate" },
-    //         type: 'Feature'
-    //     }, {
-    //         geometry: { type: "Point", coordinates: [-0.08533793, 51.50438536] },
-    //         properties: { id: "london-bridge" },
-    //         type: 'Feature'
-    //     }, {
-    //         geometry: { type: "Point", coordinates: [0.05991101, 51.48752939] },
-    //         properties: { id: "woolwich" },
-    //         type: 'Feature'
-    //     }, {
-    //         geometry: { type: "Point", coordinates: [-0.18335806, 51.49439521] },
-    //         properties: { id: "gloucester" },
-    //         type: 'Feature'
-    //     }, {
-    //         geometry: { type: "Point", coordinates: [-0.19684993, 51.5033856] },
-    //         properties: { id: "caulfield-gardens" },
-    //         type: 'Feature'
-    //     }, {
-    //         geometry: { type: "Point", coordinates: [-0.10669358, 51.51433123] },
-    //         properties: { id: "telegraph" },
-    //         type: 'Feature'
-    //     }, {
-    //         geometry: { type: "Point", coordinates: [-0.12416858, 51.50779757] },
-    //         properties: { id: "charing-cross" },
-    //         type: 'Feature'
-    //     }]
-    // };
+// $(document).ready(function() {
+var sound1, sound2, sound3;
+var soundList = [sound1, sound2, sound3];
+var linkList = [ "assets/sounds/light_bulb_breaking.mp3","assets/sounds/sample.m4a", "assets/sounds/water_droplet_3.mp3"]
+function preload(){
+	for (var i =0; i < soundList.length ; i++) {
+		soundList[i] = loadSound(linkList[i]);
+	}
+}
 
+function setup(){	
     var geojson = [{
         "geometry": {
             "type": "Point",
@@ -55,7 +24,8 @@ $(document).ready(function() {
             "coordinates": [53.389010, -129.162193]
         },
         "properties": {
-            "id": "location1"
+            "id": "location1",
+            "sound": "assets/sounds/sample.m4a"
         }
     }, {
         "geometry": {
@@ -63,7 +33,8 @@ $(document).ready(function() {
             "coordinates": [53.559837, -128.905388]
         },
         "properties": {
-            "id": "location2"
+            "id": "location2",
+            "sound": "assets/sounds/sample.m4a"
         }
     }, {
         "geometry": {
@@ -123,17 +94,17 @@ $(document).ready(function() {
     // var placesLayer = L.mapbox.featureLayer(places)
     //     .addTo(map);
 
- //    // Ahead of time, select the elements we'll need -
-	// // the narrative container and the individual sections
-	// var narrative = document.getElementById('narrative'),
-	//     sections = narrative.getElementsByTagName('section'),
-	//     currentId = '';
+    //    // Ahead of time, select the elements we'll need -
+    // // the narrative container and the individual sections
+    // var narrative = document.getElementById('narrative'),
+    //     sections = narrative.getElementsByTagName('section'),
+    //     currentId = '';
 
-	    // Array of story section elements.
+    // Array of story section elements.
     var sections = document.getElementsByTagName('section');
-    console.log(sections);
+    // console.log(sections);
 
-       // Array of marker elements with order matching section elements.
+    // Array of marker elements with order matching section elements.
     // var markers = _(sections).map(function(section) {
     //     return _(spots.markers()).find(function(m) {
     //         return m.data.properties.id === section.id;
@@ -143,12 +114,15 @@ $(document).ready(function() {
     // console.log(markers);
 
 
-     // Helper to set the active section.
+    // Helper to set the active section.
     var setActive = function(index, ease) {
         // Set active class on sections, markers.
         _(sections).each(function(s) {
             s.className = s.className.replace(' active', '')
         });
+
+        
+       
         // _(markers).each(function(m) {
         //     m.element.className = m.element.className.replace(' active', '')
         // });
@@ -158,11 +132,12 @@ $(document).ready(function() {
         // Set a body class for the active section.
         document.body.className = 'section-' + index;
 
-        console.log(geojson[index]);
 
         // Ease map to active marker.
         if (!ease) {
             map.setView([geojson[index].geometry.coordinates[0], geojson[index].geometry.coordinates[1]], geojson[index].properties.zoom || 13);
+
+            
         } else {
             map.setView([geojson[index].geometry.coordinates[0], geojson[index].geometry.coordinates[1]], geojson[index].properties.zoom || 12);
         }
@@ -184,6 +159,7 @@ $(document).ready(function() {
         // If scrolled to the very top of the page set the first section active.
         if (y === 0) return setActive(0, true);
 
+
         // Otherwise, conditionally determine the extent to which page must be
         // scrolled for each section. The first section that matches the current
         // scroll position wins and exits the loop early.
@@ -191,16 +167,80 @@ $(document).ready(function() {
         var buffer = (h * 0.3333);
         var active = _(sections).any(function(el, index) {
             memo += el.offsetHeight;
+
+            	// if switched to a section check if active and play sound. 
+            	if(sections[index].className == " active" && geojson[index].properties.sound){
+            		if(soundList[index].isPlaying()){
+            			console.log("yes");
+            		}else{
+            			soundList[index].play();
+            		}
+		             
+	             } else{
+	             	soundList[index].stop();
+	             	console.log("no");
+	             }
+
+
             return y < (memo - buffer) ? setActive(index, true) : false;
         });
 
         // If no section was set active the user has scrolled past the last section.
         // Set the last section active.
         if (!active) setActive(sections.length - 1, true);
+
     }).debounce(10);
 
     // Set map to first section.
     setActive(0, false);
 
 
-});
+
+}
+
+
+// var mySound;
+         //    if(sections[index].className == " active" && geojson[index].properties.sound){
+	        //     var mySound = loadSound(geojson[index].properties.sound, function(){
+         //    	if(sections[index].className == " active" && geojson[index].properties.sound){
+		       //       mySound.play();
+		       //       console.log("yes")
+	        //      } else{
+	        //      	mySound.stop();
+	        //      	console.log("no")
+	        //      }
+         //    });
+	        // }
+
+
+// });
+
+
+          //   var mySound;
+          //   function preload(){
+          //   	mySound = loadSound(geojson[index].properties.sound);
+          //   }
+          //   console.log(geojson[index].properties.sound)
+	         // if (sections[index].className == " active" && geojson[index].properties.sound) {
+	         //     mySound.play();
+	         //     console.log("yes")
+	         // } else {
+	         //     mySound.stop();
+	         //     console.log("false")
+	         // }
+
+
+// var test =  new p5.SoundFile(geojson[index].properties.sound);
+// 	         if (sections[index].className == " active" && geojson[index].properties.sound){
+	         	
+// 	        		test.play();
+// 	        		console.log("yes")
+// 	        } else{
+// 	        		test.stop();
+// 	        		console.log("false")
+// 	        }
+
+// function preload() {
+//     mySound = loadSound('assets/sounds/sample.m4a');
+// }
+
