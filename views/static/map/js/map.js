@@ -1,7 +1,7 @@
 // $(document).ready(function() {
-var sound1, sound2, sound3;
-var soundList = [sound1, sound2, sound3];
-var linkList = [ "assets/sounds/light_bulb_breaking.mp3","assets/sounds/sample.m4a", "assets/sounds/water_droplet_3.mp3"]
+var sound1, sound2, sound3, sound4, sound5, sound6;
+var soundList = [sound1, sound2, sound3, sound4, sound5, sound6];
+var linkList = [ "assets/sounds/light_bulb_breaking.mp3","assets/sounds/sample.m4a", "assets/sounds/water_droplet_3.mp3", "assets/sounds/cd_tray.mp3", "assets/sounds/camera_flashing_2.mp3", "assets/sounds/sample.m4a",]
 function preload(){
 	for (var i =0; i < soundList.length ; i++) {
 		soundList[i] = loadSound(linkList[i]);
@@ -42,7 +42,8 @@ function setup(){
             "coordinates": [53.773014, -128.877922]
         },
         "properties": {
-            "id": "location3"
+            "id": "location3",
+            "sound": "assets/sounds/sample.m4a"
         }
     }, {
         "geometry": {
@@ -50,7 +51,8 @@ function setup(){
             "coordinates": [53.302872, -129.051457]
         },
         "properties": {
-            "id": "location4"
+            "id": "location4",
+            "sound": "assets/sounds/sample.m4a"
         }
     }, {
         "geometry": {
@@ -58,7 +60,8 @@ function setup(){
             "coordinates": [53.189280, -129.497771]
         },
         "properties": {
-            "id": "location5"
+            "id": "location5",
+            "sound": "assets/sounds/sample.m4a"
         }
     }, {
         "geometry": {
