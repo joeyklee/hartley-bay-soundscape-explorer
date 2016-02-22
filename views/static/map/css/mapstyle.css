@@ -30,10 +30,28 @@ section a {
     text-shadow: rgba(64, 64, 64, 1) 0px 0px 4px;
 }
 
+section img {
+    display: none;
+}
+
+section .btn {
+    display: none;
+}
+
+
 section.active {
     background: #222;
     color: #eee;
 }
+
+section.active img {
+    display: inline;
+}
+
+section.active .btn {
+    display: inline;
+}
+
 
 section.active a {
     color: #eee;
@@ -60,6 +78,8 @@ h2 {
 p {
     margin: 0px;
 }
+
+
 
 .scroll {
     position: absolute;
@@ -262,4 +282,11 @@ a:hover {
 a:link {
     color: white;
     text-decoration: none;
+}
+
+
+/* ------------ */
+.vcenter {
+    display: flex;
+    align-items: center;
 }
