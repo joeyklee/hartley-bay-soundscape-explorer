@@ -12,7 +12,7 @@ function setup(){
     var geojson = [{
         "geometry": {
             "type": "Point",
-            "coordinates": [53.420121, -129.252830]
+            "coordinates": [54.312028, -130.405892]
         },
         "properties": {
             "id": "cover",
@@ -21,7 +21,7 @@ function setup(){
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [53.389010, -129.162193]
+            "coordinates": [54.321369, -130.310031]
         },
         "properties": {
             "id": "location1",
@@ -30,7 +30,7 @@ function setup(){
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [53.559837, -128.905388]
+            "coordinates": [54.359438, -130.045270]
         },
         "properties": {
             "id": "location2",
@@ -39,7 +39,7 @@ function setup(){
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [53.773014, -128.877922]
+            "coordinates": [54.214698, -129.703033]
         },
         "properties": {
             "id": "location3",
@@ -48,7 +48,7 @@ function setup(){
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [53.302872, -129.051457]
+            "coordinates": [54.100640, -129.878030]
         },
         "properties": {
             "id": "location4",
@@ -57,7 +57,7 @@ function setup(){
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [53.189280, -129.497771]
+            "coordinates": [54.114232, -130.078776]
         },
         "properties": {
             "id": "location5",
@@ -66,7 +66,7 @@ function setup(){
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [53.134132, -129.731425]
+            "coordinates": [54.071679, -130.487628]
         },
         "properties": {
             "id": "location6"
@@ -74,7 +74,7 @@ function setup(){
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [53.044382, -129.178564]
+            "coordinates": [54.257395, -130.296676]
         },
         "properties": {
             "id": "location7"
@@ -82,7 +82,7 @@ function setup(){
     }, {
         "geometry": {
             "type": "Point",
-            "coordinates": [53.605014, -129.248651]
+            "coordinates": [54.194780, -130.724856]
         },
         "properties": {
             "id": "location8"
@@ -142,7 +142,7 @@ function setup(){
 
             
         } else {
-            map.setView([geojson[index].geometry.coordinates[0], geojson[index].geometry.coordinates[1]], geojson[index].properties.zoom || 12);
+            map.setView([geojson[index].geometry.coordinates[0], geojson[index].geometry.coordinates[1]], geojson[index].properties.zoom || 14);
         }
 
         return true;
